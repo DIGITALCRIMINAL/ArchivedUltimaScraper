@@ -1,3 +1,4 @@
+from sys import exit
 import os
 from seleniumwire import webdriver
 from selenium.webdriver.common.by import By
