@@ -69,7 +69,11 @@ if TYPE_CHECKING:
     error_details_types = onlyfans_extras.ErrorDetails | fansly_extras.ErrorDetails | starsavn_extras.ErrorDetails
 parsed_args = Namespace()
 
-path = up(up(os.path.realpath(__file__)))
+import sys
+if getattr(sys, "frozen", False):
+    path = up(sys.executable)
+else:
+    path = up(up(os.path.realpath(__file__)))
 os.chdir(path)
 
 
