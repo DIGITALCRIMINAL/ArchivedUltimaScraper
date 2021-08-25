@@ -5,7 +5,7 @@ name: Linux Build
 
 on:
   push:
-    branches: [ master ]
+    branches: [ typo-fix ]
   pull_request:
     branches: [ master ]
 
