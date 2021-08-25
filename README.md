@@ -1,7 +1,7 @@
 # OnlyFans DataScraper (Python 3.9.X)
-[![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/DIGITALCRIMINAL/OnlyFans.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/DIGITALCRIMINAL/OnlyFans/context:python)
-# ![app-token](examples/64255399-96a86700-cf21-11e9-8c62-87a483f33701.png) [![Linux Build](https://github.com/americanseeder1865/OnlyFans/actions/workflows/linux-build.yml/badge.svg)](https://github.com/americanseeder1865/OnlyFans/actions/workflows/linux-build.yml)
+[![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/DIGITALCRIMINAL/OnlyFans.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/DIGITALCRIMINAL/OnlyFans/context:python) [![Linux Build](https://github.com/americanseeder1865/OnlyFans/actions/workflows/linux-build.yml/badge.svg)](https://github.com/americanseeder1865/OnlyFans/actions/workflows/linux-build.yml)
 
+# ![app-token](examples/64255399-96a86700-cf21-11e9-8c62-87a483f33701.png) 
 # Mandatory Tutorial
 
 Read the [#FAQ](README.md#faq) at the bottom of this page before submitting a issue.
