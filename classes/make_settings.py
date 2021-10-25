@@ -140,7 +140,7 @@ class config(object):
                                 self.comments = option.get(
                                     'comments', True)
                         self.auto_profile_choice: Union[List] = option.get(
-                            'auto_profile_choice', [])
+                            'auto_profile_choice', "")
                         self.auto_model_choice = option.get(
                             'auto_model_choice', False)
                         self.auto_media_choice = option.get(
