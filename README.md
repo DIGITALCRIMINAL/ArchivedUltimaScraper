@@ -192,7 +192,7 @@ Usage: Select the resolution of the video.
     720p = "720" | "720p"
     240p = "240" | "240p"
 
-### auto_profile_choice
+### auto_profile_choice:
 Types: str
 
 Usage: Select which profile to use
