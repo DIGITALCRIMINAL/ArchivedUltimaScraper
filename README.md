@@ -195,7 +195,7 @@ Usage: Select the resolution of the video.
 ### auto_profile_choice:
 Types: str
 
-Usage: Select which profile to use
+Usage: Automatically select which profile(s) to use
 
     Default = "" (forces you to chose manually)
     "x" = your choice
