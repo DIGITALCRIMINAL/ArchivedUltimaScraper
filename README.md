@@ -192,6 +192,18 @@ Usage: Select the resolution of the video.
     720p = "720" | "720p"
     240p = "240" | "240p"
 
+### auto_profile_choice
+Types: str
+
+Usage: Select which profile to use
+
+    Default = "" (forces you to chose manually)
+    "x" = your choice
+    if "x" = "0", this will do ALL profiles
+    if "x" is not equal to "0", this will scrape the respctive profile
+    
+    to get your profile number, run the scraper manually first.
+
 ### auto_site_choice:
 Types: str|int
 
