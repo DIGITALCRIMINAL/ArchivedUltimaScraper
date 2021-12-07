@@ -8,6 +8,8 @@ This is a quick documentation for the developers.
 
 To build, a Windows machine (or VM) is required. PyInstaller cannot cross-compile.
 
+**Python 3.10.1 is required.** There is a bug with the `dis` module in 3.10.0 that prevents successful build.
+
 1. Clone the repository and install the regular dependencies using `pip` like normal.
 2. Install PyInstaller with `pip install pyinstaller` - it's not in the `requirements.txt` file because it's not a requirement for regular usage of the scraper.
 3. Download and extract [`geckodriver.exe`](https://github.com/mozilla/geckodriver/releases/download/v0.27.0/geckodriver-v0.27.0-win64.zip) in `extras\OFLogin`.
