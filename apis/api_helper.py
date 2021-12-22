@@ -307,8 +307,8 @@ class session_manager:
         if "https://onlyfans.com/api2/v2/" in link:
             dynamic_rules = self.dynamic_rules
             headers["app-token"] = dynamic_rules["app_token"]
-            # auth_id = headers["user-id"]
-            a = [link, 0, dynamic_rules]
+            auth_id = headers["user-id"]
+            a = [link, auth_id, dynamic_rules]
             headers2 = self.create_signed_headers(*a)
             headers |= headers2
         elif "https://apiv2.fansly.com" in link and isinstance(
@@ -323,6 +323,7 @@ class session_manager:
         path = urlparse(link).path
         query = urlparse(link).query
         path = path if not query else f"{path}?{query}"
+        auth_id = 0 if not query else auth_id
         a = [dynamic_rules["static_param"], final_time, path, str(auth_id)]
         msg = "\n".join(a)
         message = msg.encode("utf-8")
