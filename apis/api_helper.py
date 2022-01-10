@@ -392,24 +392,22 @@ async def test_proxies(proxies: list[str]):
 
 
 def restore_missing_data(master_set2: list[str], media_set, split_by):
-    count = 0
     new_set: set[str] = set()
-    for item in media_set:
+    for link, item in zip(master_set2, media_set):
         if not item:
-            link = master_set2[count]
             offset = int(link.split("?")[-1].split("&")[1].split("=")[1])
             limit = int(link.split("?")[-1].split("&")[0].split("=")[1])
             if limit == split_by + 1:
                 break
             offset2 = offset
             limit2 = int(limit / split_by) if limit > 1 else 1
+            if limit2 >= limit:
+                continue
             for item in range(1, split_by + 1):
                 link2 = link.replace("limit=" + str(limit), "limit=" + str(limit2))
                 link2 = link2.replace("offset=" + str(offset), "offset=" + str(offset2))
                 offset2 += limit2
                 new_set.add(link2)
-        count += 1
-    new_set = new_set if new_set else master_set2
     return list(new_set)
 
 
@@ -420,7 +418,7 @@ async def scrape_endpoint_links(
     max_attempts = 100
     for attempt in list(range(max_attempts)):
         if not links or not session_manager:
-            continue
+            break
         print("Scrape Attempt: " + str(attempt + 1) + "/" + str(max_attempts))
         results = await session_manager.async_requests(links)
         results = await handle_error_details(results, True, session_manager.auth)
