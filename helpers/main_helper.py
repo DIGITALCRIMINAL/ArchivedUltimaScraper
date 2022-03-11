@@ -870,7 +870,7 @@ class OptionsFormat:
                 self.item_keys = [x.username for x in self.items]
                 pp = pprint.PrettyPrinter(indent=1, width=1)
                 choices = {self.items.index(x) + 1 : x.username for x in self.items}
-                self.string = pp.pformat(choices)
+                self.string = f"{final_string} |\n {pp.pformat(choices)}"
                 final_list = self.choose_option()
                 self.final_choices = [
                     key
