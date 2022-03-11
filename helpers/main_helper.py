@@ -6,6 +6,7 @@ import json
 import math
 import os
 import platform
+import pprint
 import random
 import re
 import secrets
@@ -867,11 +868,9 @@ class OptionsFormat:
                 ]
             case "subscriptions":
                 self.item_keys = [x.username for x in self.items]
-                my_string = " | ".join(
-                    map(lambda x: f"{self.items.index(x)+1} = {x.username}", self.items)
-                )
-                final_string = f"{final_string} | {my_string}"
-                self.string = final_string
+                pp = pprint.PrettyPrinter(indent=1, width=1)
+                choices = {self.items.index(x) + 1 : x.username for x in self.items}
+                self.string = pp.pformat(choices)
                 final_list = self.choose_option()
                 self.final_choices = [
                     key
