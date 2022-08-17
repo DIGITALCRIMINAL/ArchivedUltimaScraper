@@ -28,7 +28,8 @@ jobs:
           password: ${{ github.token }}
 
       # container names must be lower case
-      - id: image_name
+      - name: Image Name
+        id: image_name
         uses: ASzc/change-string-case-action@v2
         with:
           string: ${{ github.repository }}
