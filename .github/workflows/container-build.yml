@@ -26,6 +26,10 @@ jobs:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ github.token }}
+      - name: Image Name
+        # container names must be lower case
+        run: |
+          echo "IMAGE=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}  
       -
         name: Build and push
         uses: docker/build-push-action@v3
@@ -34,4 +38,5 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
-            ghcr.io/${{ github.repository }}:${{ github.ref_name }}
+            ghcr.io/${ IMAGE }:${{ github.ref_name }}
+            ghcr.io/${ IMAGE }:${{ github.sha }}
