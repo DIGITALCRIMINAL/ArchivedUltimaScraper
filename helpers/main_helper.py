@@ -960,9 +960,11 @@ async def process_profiles(
             user_auth_filepath = user_profile.joinpath("auth.json")
             datas: dict[str, Any] = {}
             temp_json_auth = import_json(user_auth_filepath)
-            json_auth = temp_json_auth["auth"]
-            if not json_auth.get("active", None):
+            json_auth = temp_json_auth.get("auth")
+            # Skip this user if the authorization info is missing, or if the user has a value of `false` for the "active" field.
+            if (json_auth is None) or (json_auth.get("active") is None):
                 continue
+
             json_auth["username"] = user_profile.name
             auth = api.add_auth(json_auth)
             auth.session_manager.proxies = global_settings.proxies
