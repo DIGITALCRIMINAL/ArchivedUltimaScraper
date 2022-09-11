@@ -1038,14 +1038,16 @@ async def process_jobs(
             chats = await authed.get_chats()
             for chat in chats:
                 username: str = chat["withUser"].username
-                subscription = await authed.get_subscription(identifier=username)
-                if not subscription:
-                    subscription = chat["withUser"]
-                    authed.subscriptions.append(subscription)
-                    subscription.create_directory_manager()
-                await datascraper.start_datascraper(
-                    authed, username, whitelist=["Messages"]
-                )
+                for subscription in subscription_list:
+                    if username == subscription.username:
+                        subscription = await authed.get_subscription(identifier=username)
+                        if not subscription:
+                            subscription = chat["withUser"]
+                            authed.subscriptions.append(subscription)
+                            subscription.create_directory_manager()
+                        await datascraper.start_datascraper(
+                            authed, username, whitelist=["Messages"]
+                        )
             print
     if not subscription_list:
         print("There's no subscriptions to scrape.")
