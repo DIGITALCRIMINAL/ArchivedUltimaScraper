@@ -957,6 +957,8 @@ async def process_profiles(
         temp_users = pd_s.iterdir()
         temp_users = remove_mandatory_files(temp_users)
         for user_profile in temp_users:
+            if user_profile.name == ".DS_Store":
+                continue
             user_auth_filepath = user_profile.joinpath("auth.json")
             datas: dict[str, Any] = {}
             temp_json_auth = import_json(user_auth_filepath)
