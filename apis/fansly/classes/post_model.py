@@ -18,7 +18,7 @@ class create_post:
         self.postedAtPrecise: str = option.get("postedAtPrecise")
         self.expiredAt: Any = option.get("expiredAt")
         self.author = user
-        text: str = option.get("text", "")
+        text: str = option.get("content", "")
         self.text = str(text or "")
         raw_text: str = option.get("rawText", "")
         self.rawText = str(raw_text or "")
