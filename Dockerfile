@@ -10,7 +10,7 @@ ENV POETRY_VIRTUALENVS_CREATE=false
 RUN ["/bin/bash", "-c", "set -o pipefail && curl -sSL https://install.python-poetry.org | python3 -"]
 
 COPY pyproject.toml poetry.lock ./
-RUN poetry install --only main
+RUN "poetry install --only main"
 
 COPY . .
 
