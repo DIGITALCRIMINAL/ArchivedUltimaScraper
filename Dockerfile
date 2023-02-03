@@ -10,4 +10,4 @@ RUN poetry install --no-dev
 
 COPY . .
 
-CMD [ "poetry", "run", "python", "./start_ofd.py" ]
+CMD [ "poetry", "run", "python", "./start_us.py" ]
