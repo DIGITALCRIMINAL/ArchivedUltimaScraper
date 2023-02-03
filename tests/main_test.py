@@ -1,15 +1,8 @@
+import os
+import sys
 from pathlib import Path
 from sys import exit
-import sys
-import os
-from os.path import dirname as up
 from typing import Any
-
-if getattr(sys, "frozen", False):
-    path = up(sys.executable)
-else:
-    path = up(up(os.path.realpath(__file__)))
-os.chdir(path)
 
 
 def version_check():
@@ -24,28 +17,40 @@ def version_check():
 # Updating any outdated config values
 
 
-def check_config():
-    import helpers.main_helper as main_helper
+def check_start_up():
+    from ultima_scraper_api.managers.storage_managers.filesystem_manager import (
+        FilesystemManager,
+    )
 
-    config_path = Path(".settings", "config.json")
+    fsm = FilesystemManager()
+    fsm.check()
+
+    version_check()
+    check_config(fsm.settings_directory)
+    check_profiles(fsm.settings_directory, fsm.profiles_directory)
+
+
+def check_config(directory: Path):
+    import ultima_scraper_api.helpers.main_helper as main_helper
+
+    config_path = directory.joinpath("config.json")
     json_config, _updated = main_helper.get_config(config_path)
     return json_config
 
 
-def check_profiles():
-    config_path = Path(".settings", "config.json")
-    import helpers.main_helper as main_helper
-    from apis.onlyfans.onlyfans import auth_details as onlyfans_auth_details
-    from apis.fansly.fansly import auth_details as fansly_auth_details
-    from apis.starsavn.starsavn import auth_details as starsavn_auth_details
+def check_profiles(settings_directory: Path, profiles_directory: Path):
+    import ultima_scraper_api.helpers.main_helper as main_helper
+    from ultima_scraper_api.apis.fansly.classes.extras import (
+        auth_details as fansly_auth_details,
+    )
+    from ultima_scraper_api.apis.onlyfans.classes.extras import (
+        auth_details as onlyfans_auth_details,
+    )
 
-    config, _updated = main_helper.get_config(config_path)
-    settings = config.settings
-    profile_directories = settings.profile_directories
-    profile_directory = profile_directories[0]
-    matches = ["OnlyFans", "Fansly", "StarsAVN"]
+    # config, _updated = main_helper.get_config(config_path)
+    matches = ["OnlyFans", "Fansly"]
     for string_match in matches:
-        profile_site_directory = profile_directory.joinpath(string_match)
+        profile_site_directory = profiles_directory.joinpath(string_match)
         if os.path.exists(profile_site_directory):
             e = os.listdir(profile_site_directory)
             e = [os.path.join(profile_site_directory, x, "auth.json") for x in e]
@@ -64,8 +69,6 @@ def check_profiles():
                 case "Fansly":
                     new_item["auth"] = fansly_auth_details().export()
 
-                case "StarsAVN":
-                    new_item["auth"] = starsavn_auth_details().export()
                 case _:
                     continue
             main_helper.export_json(new_item, auth_filepath)
@@ -73,5 +76,3 @@ def check_profiles():
                 f"{auth_filepath} has been created. Fill in the relevant details and then press enter to continue.",
                 auth_filepath,
             )
-        print
-    print
